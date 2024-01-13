@@ -1,0 +1,52 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="alert alert-primary mt-2 d-flex justify-content-center gap-2" role="alert">
+    <h2>ADMIN</h2>
+    <h2 class="btn btn-outline-success"><a href="{% url 'home' %}">BOOKS</a></h2>
+     
+   
+</div>
+<form class="d-flex" role="search" method="GET">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="qs">
+      <button class="btn btn-outline-success" type="submit" id='search'>Search</button>
+    </form>
+
+<div class="d-flex justify-content-center mt-3">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" >
+        <a href="{% url 'register' %}">create new</a>
+    </button>
+</div>
+
+
+
+
+<div class="ag-format-container">
+    <div class="ag-courses_box">
+     
+      {% for usr in users %}
+      <div class="ag-courses_item">
+        <a href="{% url 'user-detail' usr.id %}" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+          
+          <div class="ag-courses-item_title">
+            {% comment %} <img src="{{ book.img.url }}" class="rounded-circle overflow-hidden" style="width: 100px; height: 100px; object-fit: cover;"> {% endcomment %}
+
+            <br>
+              {{usr.username}}
+          </div>
+         
+  
+          
+        </a>
+      </div>
+      {% endfor %}
+  </div>
+
+
+</div>
+
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="alert alert-primary mt-2 d-flex justify-content-center gap-2" role="alert">
+    <h2>BOOKS</h2>
+    <h2 class="btn btn-outline-success"><a href="{% url 'user' %}">ADMIN</a></h2>
+     
+   
+</div>
+<form class="d-flex" role="search" method="GET">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="qs">
+      <button class="btn btn-outline-success" type="submit" id='search'>Search</button>
+    </form>
+
+<div class="d-flex justify-content-center mt-3">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        create new
+    </button>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  method="POST" enctype="multipart/form-data" action="/">
+          {% csrf_token %}
+          {{form.as_p}}
+          <button id="submit-button" type="submit" class="btn btn-success" data-bs-dismiss="modal">submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+
+<!-- cards -->
+
+<div class="ag-format-container">
+    <div class="ag-courses_box">
+     
+      {% for book in books %}
+      <div class="ag-courses_item">
+        <a href="{% url 'detail' book.id %}" class="ag-courses-item_link">
+          <div class="ag-courses-item_bg"></div>
+          
+          <div class="ag-courses-item_title">
+            <img src="{{ book.img.url }}" class="rounded-circle overflow-hidden" style="width: 100px; height: 100px; object-fit: cover;">
+
+            <br>
+              {{book.name}}
+          </div>
+         
+  
+          <div class="ag-courses-item_date-box">
+            Added:
+            <span class="ag-courses-item_date">
+              {{book.created_at}}
+            </span>
+          </div>
+        </a>
+      </div>
+  
+      {% endfor %}
+  
+      
+     
+  
+    </div>
+  </div>
+
+
+</div>
+
+{% endblock content %}
